@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Estoque - Cadastrar Marca{% endblock %}
+{% block content %}
+<form method="POST" action="{% url 'estoque:cadastrar_marca' %}">
+    {% csrf_token %}
+<p align='center'>Cadastro de Marca</p>
+{% for campo in form %}
+    <div class="form-group row">
+        <div class="col-xs-4">
+            {{ campo.label }}
+            {{ campo.error }}
+            {{ campo }}
+        </div>
+    </div>
+{% endfor %}
+<div class="form-group row">
+    <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+</div>
+</form>
+{% endblock %}

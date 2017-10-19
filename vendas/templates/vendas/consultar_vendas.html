@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Vendas - Consultar{% endblock %}
+{% block content %}
+{% if controle == 1 %}
+<p align="center">Vendas Realizadas</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Data de Emissão</th>
+      <th>Produto</th>
+      <th>Desconto</th>
+      <th>Acréscimo</th>
+      <th>Valor</th>
+      <th>Forma de Pagamento</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for venda in vendas %}
+    <tr>
+        <td>{{venda.id}}</td>
+        <td>{{venda.data_emissao}}</td>
+        <td><ul>
+            {% for prod in venda.venda_produto.all %}
+                    <li>{{prod}}</li>
+            {% endfor %}
+        </ul></td>
+        <td>
+            {% if venda.desconto is not None %}
+                    R$ {{venda.desconto}}
+            {% else %}
+                     R$ 0,00
+            {% endif %}
+        </td>
+         <td>
+            {% if venda.acrescimo is not None %}
+                    R$ {{venda.acrescimo}}
+            {% else %}
+                     R$ 0,00
+            {% endif %}
+        </td>
+        <td>R$ {{venda.valor}}</td>
+        <td>{{venda.venda_fp}}</td>
+        <td><a href="{% url 'vendas:excluir_vendas' venda.pk %}">
+                  <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Excluir
+                  </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<form method="POST" action="{% url 'vendas:consultar_vendas' %}">
+    {% csrf_token %}
+<p align='center'>Consultar Vendas</p>
+    <div class="form-group row">
+        <div class="col-xs-4">
+            Digite o código ou procure por data
+            {{ form.data_emissao }}
+        </div>
+    </div>
+<div class="form-group row">
+    <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Consultar</button>
+    </div>
+</div>
+</form>
+{% endif %}
+{% endblock %}

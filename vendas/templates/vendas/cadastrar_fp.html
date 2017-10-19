@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Vendas - Forma de Pagamento{% endblock %}
+{% block content %}
+
+<form method="POST" action="{% url 'vendas:cadastrar_fp' %}">
+    {% csrf_token %}
+<p align='center'>Cadastrar Forma de Pagamento</p>
+{% for campo in form %}
+    <div class="form-group row">
+        <div class="col-xs-4">
+            {{ campo.label }}
+            {{ campo }}
+            {{ campo.errors }}
+        </div>
+    </div>
+{% endfor %}
+<div class="form-group row">
+    <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+</div>
+</form>
+{% endblock %}

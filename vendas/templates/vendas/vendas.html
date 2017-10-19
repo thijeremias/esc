@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Vendas - Cadastrar{% endblock %}
+{% block content %}
+
+<form method="POST" action="{% url 'vendas:vendas' %}">
+    {% csrf_token %}
+<p align='center'>Cadastrar Venda</p>
+{% for campo in form %}
+    <div class="form-group row">
+        <div class="col-xs-4">
+            {{ campo.label }}
+            {{ campo }}
+            {{ campo.errors }}
+        </div>
+    </div>
+{% endfor %}
+<div class="form-group row">
+    <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+</div>
+</form>
+{% endblock %}

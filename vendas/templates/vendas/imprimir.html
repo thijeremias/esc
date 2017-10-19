@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Imprimir</title>
+        <style type="text/css">
+            #id{
+                font-family: "Arial", arial, serif;
+                font-size: 14px;
+                text-align: right;
+            }
+            #corpo{
+                font-family: "Arial", arial, serif;
+                font-size: 14px;
+            }
+            #topo {
+                position: fixed;
+                text-align: center;
+                height: 600px;
+                font-family: "Arial", arial, serif;
+                font-size: 18px
+            }
+            table, td, tr {
+                border: solid 1px #000;
+                padding: 2px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="topo">
+            <p id="id"><strong>N°: {{vendas.id}}</strong></p>
+            <h1>ORÇAMENTO</h1>
+            
+            <h3>Lavajato & Estacionamento Santa Rita</h3>
+            <p>Rua Pires e Albuquerque, 424 - centro, Montes Claros - MG Tel.: (38) 99853-1810 | 99224-6029</p>
+        </div>
+        
+        
+        <hr/>
+        
+        
+        
+        <div id="corpo">
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan='2'><strong>Produtos/Serviços</strong></td>
+                        <td><strong>Valor</strong></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        
+                        <td colspan='2'>
+                        {% for prod in vendas.venda_produto.all %}
+                            {{prod}}<br>
+                        {% endfor %}
+                        </td>
+                        <td>R$ {{vendas.valor}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan='2' align="right"><strong>Total:</strong></td>
+                        <td><strong>R$ {{vendas.valor}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+            
+        
+        </div>
+        
+        
+        
+        <div id="footer">
+            <footer>
+                <hr/>
+                <p>ESC - Sistema de Controle de Estacionamentos</p>
+            </footer>
+        </div>
+    </body>
+</html>
