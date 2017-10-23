@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
-{% block title %}Estoque - Cadastrar Marca{% endblock %}
+{% block title %}Estacionamento - Entrada{% endblock %}
 {% block content %}
-<form method="POST" action="{% url 'estoque:cadastrar_marca' %}">
+
+<form method="POST" action="{% url 'estacionamento:entrada' %}">
     {% csrf_token %}
-<p align='center'>Cadastro de Marca</p>
+<p align='center'>Entrada de Veículo</p>
 {% for campo in form %}
     <div class="form-group row">
         <div class="col-xs-4">
             {{ campo.label }}
             {{ campo }}
-            {{ campo.error }}
+            {{ campo.errors }}
         </div>
     </div>
 {% endfor %}
 <div class="form-group row">
     <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Entrar</button>
     </div>
 </div>
 </form>

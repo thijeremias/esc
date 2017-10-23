@@ -16,14 +16,16 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-import estoque, vendas, estacionamento
 from . import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^estoque/', include('estoque.urls', namespace = 'estoque')),
-    url(r'^vendas/', include('vendas.urls', namespace = 'vendas')),
-    url(r'^estacionamento/', include('estacionamento.urls', namespace = 'estacionamento')),
-    url(r'^$', views.index, name='index'),
+    url(r'^cadastrar_cliente/$', views.cadastrar_cliente, name = 'cadastrar_cliente'),
+    url(r'^cadastrar_veiculo/$', views.cadastrar_veiculo, name = 'cadastrar_veiculo'),
+    url(r'^mensalistas/$', views.mensalistas, name = 'mensalistas'),
+    url(r'^entrada/$', views.entrada, name = 'entrada'),
+    url(r'^saida/$', views.saida, name = 'saida'),
+    url(r'^config/$', views.config, name='config'),
+    
+    
     
 ]

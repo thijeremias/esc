@@ -19,7 +19,7 @@ def vendas(request):
             venda.save()
             return redirect('vendas:imprimir')
         else:
-             return HttpResponse(venda.errors)
+             context['form'] = venda
     else:
         context['form'] = vendaForm()
     return render(request, 'vendas/vendas.html', context)
@@ -30,7 +30,9 @@ def cadastrar_fp(request):
         fp = fpForm(request.POST)
         if fp.is_valid():
             fp.save()
-        context['form'] = fpForm()
+            context['form'] = fpForm()
+        else:
+            context['form'] = fp
     else:
         context['form'] = fpForm()
     return render(request,'vendas/cadastrar_fp.html', context)

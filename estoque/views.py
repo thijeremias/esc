@@ -11,7 +11,9 @@ def cadastrar(request):
         produto = produtoForm(request.POST)
         if produto.is_valid():
             produto.save()
-        context['form'] = produtoForm()
+            context['form'] = produtoForm()
+        else:
+            context['form'] = produto
     else:
         context['form'] = produtoForm()
     return render(request,'estoque/cadastrar.html',context)
@@ -22,7 +24,9 @@ def cadastrar_marca(request):
         marca = marcaForm(request.POST)
         if marca.is_valid():
             marca.save()
-        context['form'] = marcaForm()
+            context['form'] = marcaForm()
+        else:
+            context['form'] = marca
     else:
         context['form'] = marcaForm()
     return render(request, 'estoque/cadastrar_marca.html', context)

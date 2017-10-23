@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'estoque',
     'esc',
     'vendas',
+    'estacionamento',
 ]
 
 MIDDLEWARE_CLASSES = [

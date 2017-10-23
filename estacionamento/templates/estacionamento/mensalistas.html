@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Estacionamento - Mensalistas{% endblock %}
+{% block content %}
+
+<p align="center">Mensalistas</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th colspan="2">Nome</th>
+      <th colspan="2">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mensal in mensalistas %}
+    <tr>
+        <td colspan="2">{{mensal.proprietario}}</td>
+        <td colspan="2">{{mensal.valor}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td align="right"><strong>Quantidade: </strong></td>
+        <td align="left"><strong>{{quantidade}}</strong></td>
+        <td align="right"><strong>Valor Total: </strong></td>
+        <td align="left"><strong>R$ {{valor_total.valor__sum}}</strong></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

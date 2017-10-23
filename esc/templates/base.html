@@ -43,13 +43,26 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class=""><a id="home" href="{% url 'index' %}">Home</a></li>
+              
 
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estacionamento<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'estacionamento:cadastrar_cliente' %}">Cadastrar Cliente</a></li>
+                  <li><a href="{% url 'estacionamento:cadastrar_veiculo' %}">Cadastrar Veículo</a></li>
+                  <li><a href="{% url 'estacionamento:mensalistas' %}">Mensalistas</a></li>
+                  <li><a href="{% url 'estacionamento:entrada' %}">Entrada Avulsa</a></li>
+                  <li><a href="{% url 'estacionamento:saida' %}">Saída Avulsa</a></li>
+                  <!--<li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>-->
+                </ul>
+              </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estoque<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'estoque:cadastrar' %}">Cadastrar Produto</a></li>
-                  <li><a href="{% url 'estoque:cadastrar_marca' %}">Cadastrar Marca</a></li>
                   <li><a href="{% url 'estoque:consultar' %}">Consultar</a></li>
                   <!--<li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
@@ -61,8 +74,19 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vendas<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'vendas:vendas' %}">Cadastrar Venda</a></li>
-                  <li><a href="{% url 'vendas:cadastrar_fp' %}">Cadastrar Forma de Pagamento</a></li>
                   <li><a href="{% url 'vendas:consultar_vendas' %}">Consultar</a></li>
+                  <!--<li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>-->
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configurações<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'estacionamento:config' %}">Valor Hora</a></li>
+                  <li><a href="{% url 'estoque:cadastrar_marca' %}">Cadastrar Marca</a></li>
+                  <li><a href="{% url 'vendas:cadastrar_fp' %}">Cadastrar Forma de Pagamento</a></li>
                   <!--<li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
