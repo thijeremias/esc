@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Estacionamento - Configuraçãoes{% endblock %}
 {% block content %}
 
@@ -20,4 +21,8 @@
     </div>
 </div>
 </form>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'estoque/js/config.js' %}"></script>
 {% endblock %}

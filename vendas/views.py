@@ -1,13 +1,13 @@
 #-*-coding: utf8 -*-
-from django.shortcuts import render, redirect
-from .forms import vendaForm, fpForm, consultarVendaForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import vendaForm, fpForm, consultarVendaForm, m2mForm
 from django.http import JsonResponse, HttpResponse
 from estoque.models import Produto
-from .models import Vendas
+from .models import Vendas, venda_produtos
 import json
 from django.core import serializers
 from django.db.models import Q
-from .utils import render_to_pdf
+from .utils import render_to_pdf, create_table
 
 # Create your views here.
 
@@ -17,10 +17,12 @@ def vendas(request):
         venda = vendaForm(request.POST)
         if venda.is_valid():
             venda.save()
+            create_table(request.POST.getlist('produto_id'),request.POST.getlist('quantidade'))
             return redirect('vendas:imprimir')
         else:
              context['form'] = venda
     else:
+        context['form2'] = m2mForm()
         context['form'] = vendaForm()
     return render(request, 'vendas/vendas.html', context)
 
@@ -59,6 +61,7 @@ def imprimir(request):
     template_path = 'vendas/imprimir.html'
     context = {}
     context['vendas'] = Vendas.objects.last() 
+    context['m2m'] = venda_produtos.objects.filter(venda_id=context['vendas'].id)
     return render_to_pdf(template_path,context)
 
 def ajax_vendas(request):

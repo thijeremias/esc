@@ -1,14 +1,16 @@
 #-*-coding: utf8 -*-
 from django import forms
 from .models import Cliente, Veiculo, Config, Entrada, Saida
-from phonenumber_field.modelfields import PhoneNumberField
 
 class configForm(forms.ModelForm):
     class Meta:
         model = Config
-        fields = ('valor_hora',)
+        fields = ('valor_hora','valor_hora_moto')
         widgets = {
             'valor_hora': forms.NumberInput(attrs = {'class': 'form-control',
+                                                  'placeholder': 'Ex: 0,00'
+        }),
+            'valor_hora_moto': forms.NumberInput(attrs = {'class': 'form-control',
                                                   'placeholder': 'Ex: 0,00'
         }),
         }
@@ -36,6 +38,39 @@ class veiculoForm(forms.ModelForm):
                 
             }
 
+class veiculoForm2(forms.ModelForm):
+    class Meta:
+        model = Veiculo
+        fields = ('__all__')
+        widgets = { 
+                'proprietario': forms.Select(attrs = {'class': 'form-control',}),
+                'marca': forms.Select(attrs = {'class': 'form-control',}),
+                'modelo': forms.TextInput(attrs = {'class': 'form-control',
+                                                   'readonly': True
+                }),
+                'placa': forms.TextInput(attrs = {'class': 'form-control', 
+                                                  'readonly': True
+                    }),
+                'cor': forms.TextInput(attrs = {'class': 'form-control',
+                                                'readonly': True
+                }),
+                'mensalista': forms.CheckboxInput(attrs = {'readonly': True}),
+                'valor': forms.NumberInput(attrs = {'class': 'form-control',
+                                                    'readonly': True
+                })
+                
+            }
+            
+class consultaVeiculoForm(forms.ModelForm):
+    class Meta:
+        model = Veiculo
+        fields = ('placa',)
+        widgets = {
+            'placa': forms.TextInput(attrs = {'class': 'form-control', 
+                                                  'placeholder': 'Ex: OQR1364'
+                    }),
+        }
+
 class clienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
@@ -54,14 +89,15 @@ class clienteForm(forms.ModelForm):
 class entradaForm(forms.ModelForm):
     class Meta:
         model = Entrada
-        fields = ('placa', 'datetime')
+        fields = ('placa', 'datetime', 'tipo')
         widgets = {
                   'placa': forms.TextInput(attrs = {'class': 'form-control',
                                                     'placeholder': 'Ex: OQR1364'
                   }),
                   'datetime': forms.TextInput(attrs = {'class': 'form-control',
                                                       'readonly': True,
-                  })
+                  }),
+                  'tipo': forms.RadioSelect()
         }
 
 class saidaForm(forms.ModelForm):

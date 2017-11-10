@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Financeiro - Bordero{% endblock %}
+{% block content %}
+{% if controle == 1 %}
+<p align="center">Borderô</p>
+<table class="table">
+  <tbody>
+    <tr>
+        <td colspan='2'><strong>ENTRADAS</strong></td>
+    </tr>
+    
+    <tr>
+            <td align="center">
+                {% for rec in entrada.receber %}
+                        {{rec.veiculo.proprietario}}<br/>
+                {% endfor %}
+                {% for lac in entrada.caixa_entrada %}
+                        {{lac.descricao}}<br/>
+                {% endfor %}
+                <p align="right">Total:</p>
+            </td>
+            
+            <td border="none">
+                {% for rec in entrada.receber %}
+                        {{rec.valor}}<br/>
+                {% endfor %}
+                {% for lac in entrada.caixa_entrada %}
+                        {{lac.valor}}<br/>
+                {% endfor %}
+                <p>{{entrada.total_entrada}}</p>
+            </td>
+            
+    </tr>
+    
+    <tr>
+        <td colspan='2'><strong>SAÍDAS</strong></td>
+    </tr>
+    
+    <tr>
+            <td align="center">
+                {% for lac in saida.caixa_saida %}
+                        {{lac.descricao}}<br/>
+                {% endfor %}
+                <p align="right">Total:</p>
+            </td>
+            
+            <td border="none">
+                {% for lac in saida.caixa_saida %}
+                        {{lac.valor}}<br/>
+                {% endfor %}
+                <p>{{saida.total_saida}}</p>
+            </td>
+            
+    </tr>
+    
+    <tr>
+        <td colspan='2'><strong>RESUMO</strong></td>
+    </tr>
+    
+    <tr>
+            <td align="center">
+                ENTRADAS <br/>
+                SAÍDAS   <br/>
+                SALDO     
+            </td>
+            <td>
+                {{entrada.total_entrada}}<br/>
+                {{saida.total_saida}}<br/>
+                {{saldo}} 
+            </td>
+    </tr>
+    
+  </tbody>
+</table>
+{% else %}
+<form method="POST" action="{% url 'financeiro:bordero' %}">
+    {% csrf_token %}
+<p align='center'>Borderô</p>
+    <div class="form-group row">
+        <div class="col-xs-4">
+            Data Inicial
+            <input type="date" class = 'form-control' name="data_inicial"/><br/>
+            Data Final
+            <input type="date" class = 'form-control' name="data_final"/>
+        </div>
+    </div>
+<div class="form-group row">
+    <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary">Consultar</button>
+    </div>
+</div>
+</form>
+{% endif %}
+{% endblock %}

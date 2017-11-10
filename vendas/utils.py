@@ -3,7 +3,9 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.conf import settings
 import os
-
+from estoque.models import Produto
+from .models import Vendas, venda_produtos
+from django.shortcuts import get_object_or_404
 
 def link_callback(uri, rel):
     """
@@ -39,3 +41,20 @@ def render_to_pdf(template_path, context):
     if pisaStatus.err:
         return HttpResponse('Erro ao gerar PDF')
     return response
+
+def diminui_quantidade(produto,qtd):
+    produto.quantidade = produto.quantidade - int(qtd)
+    produto.save()
+
+def create_table(lista_produtos,lista_qtd):
+    count = 0
+    venda = Vendas.objects.last()
+    for produto in lista_produtos:
+        try:
+            p = get_object_or_404(Produto, pk = produto)
+        except:
+            break
+        diminui_quantidade(p,lista_qtd[count])
+        m1 = venda_produtos(venda_id=venda,produto_id=p,quantidade=lista_qtd[count])
+        m1.save()
+        count = count + 1

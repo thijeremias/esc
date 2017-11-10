@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^estoque/', include('estoque.urls', namespace = 'estoque')),
     url(r'^vendas/', include('vendas.urls', namespace = 'vendas')),
     url(r'^estacionamento/', include('estacionamento.urls', namespace = 'estacionamento')),
+    url(r'^financeiro/', include('financeiro.urls', namespace = 'financeiro')),
     url(r'^$', views.index, name='index'),
     
 ]

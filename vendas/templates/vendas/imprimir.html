@@ -44,27 +44,39 @@
         <div id="corpo">
             <table>
                 <thead>
+                    
                     <tr>
                         <td colspan='2'><strong>Produtos/Serviços</strong></td>
-                        <td><strong>Valor</strong></td>
+                        <td width="50px" align="center"><strong>QTD</strong></td>
+                        <td width="150px" align="center"><strong>Valor</strong></td>
                     </tr>
+                    
                 </thead>
                 <tbody>
                     
                     <tr>
-                        
                         <td colspan='2'>
                         {% for prod in vendas.venda_produto.all %}
                             {{prod}}<br>
                         {% endfor %}
                         </td>
-                        <td>R$ {{vendas.valor}}</td>
+                        <td align="center">
+                        {% for qtd in m2m %}
+                            {{qtd.quantidade}}<br>
+                        {% endfor %}
+                        </td>
+                        <td align="center">
+                        {% for prod in vendas.venda_produto.all %}
+                            {{prod.valor}}<br>
+                        {% endfor %}
+                        </td>
                     </tr>
                     
                     <tr>
-                        <td colspan='2' align="right"><strong>Total:</strong></td>
-                        <td><strong>R$ {{vendas.valor}}</strong></td>
+                        <td colspan='3' align="right"><strong>Total:</strong></td>
+                        <td align="center"><strong>{{vendas.valor}}</strong></td>
                     </tr>
+                    
                 </tbody>
             </table>
             

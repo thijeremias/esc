@@ -3,9 +3,11 @@
 {% block content %}
 
 {% if result %}
+<p align='center'>Saída de Veículo</p>
 <div class="form-group row">
-        <div class="col-xs-4">
-            <p>O valor a receber é: R$ {{result}}</p>
+        <div class="col-xs-6">
+            <p>Tempo de permanência no estacionamento: {{result.tempo}} minutos.</p>
+            <p>valor: R$ {{result.resultado}}</p>
         </div>
     </div>
 {% else %}

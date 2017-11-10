@@ -50,6 +50,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'estacionamento:cadastrar_cliente' %}">Cadastrar Cliente</a></li>
                   <li><a href="{% url 'estacionamento:cadastrar_veiculo' %}">Cadastrar Veículo</a></li>
+                  <li><a href="{% url 'estacionamento:consultar_veiculo' %}">Consultar Veículo</a></li>
                   <li><a href="{% url 'estacionamento:mensalistas' %}">Mensalistas</a></li>
                   <li><a href="{% url 'estacionamento:entrada' %}">Entrada Avulsa</a></li>
                   <li><a href="{% url 'estacionamento:saida' %}">Saída Avulsa</a></li>
@@ -75,6 +76,19 @@
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'vendas:vendas' %}">Cadastrar Venda</a></li>
                   <li><a href="{% url 'vendas:consultar_vendas' %}">Consultar</a></li>
+                  <!--<li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>-->
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Financeiro<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'financeiro:contas_receber' %}">Contas a Receber</a></li>
+                  <li><a href="{% url 'financeiro:lancamentos' %}">Lançamentos</a></li>
+                  <li><a href="{% url 'financeiro:consultar' %}">Consultar</a></li>
+                  <li><a href="{% url 'financeiro:bordero' %}">Borderô</a></li>
                   <!--<li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
@@ -113,7 +127,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="{% static 'estoque/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'estoque/js/meu.js' %}"></script>
     <script src="{% static 'estoque/js/jquery.js' %}"></script>
     {% block js %}
     {% endblock %}

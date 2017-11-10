@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import configForm, veiculoForm, clienteForm, entradaForm, saidaForm
+from .forms import configForm, veiculoForm, clienteForm, entradaForm, saidaForm, consultaVeiculoForm, veiculoForm2
 from .models import Veiculo, Config, Entrada
 from django.db.models import Sum
-from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from .utils import calcula_tempo
 
 # Create your views here.
 @csrf_exempt
@@ -69,14 +69,30 @@ def entrada(request):
 def saida(request):
     context = {}
     if request.method == 'POST':
-        entrada = Entrada.objects.get(pk = request.POST.get('placa'))
-        valorHora = Config.objects.first()
-        result = timezone.now() - entrada.datetime
-        result = (result.seconds/3600)*float(valorHora.valor_hora)
-        context['result'] = round(result,2)
-        entrada.ativo = False
-        entrada.save()
+        context['result'] = calcula_tempo(request.POST.get('placa'))
         return render(request, 'estacionamento/saida.html',context)
     else:
         context['form'] = saidaForm()
         return render(request, 'estacionamento/saida.html',context)
+        
+def consultar_veiculo(request):
+    context = {}
+    if request.method == "POST":
+        veiculo = Veiculo.objects.filter(placa__iexact = request.POST.get('placa'))
+        context['veiculos'] = veiculo
+        context['controle'] = 1
+    else:
+        context['form'] = consultaVeiculoForm()
+    return render(request,'estacionamento/consultar_veiculo.html',context)
+
+def editar_veiculo(request, pk):
+    context = {}
+    veiculo = Veiculo.objects.get(id = pk)
+    if request.method == 'POST':
+        veiculo = veiculoForm(request.POST, instance = veiculo)
+        if veiculo.is_valid():
+            veiculo.save()
+            return redirect('estacionamento:consultar_veiculo')
+    else:
+        context['form'] = veiculoForm(instance = veiculo)
+    return render(request,'estacionamento/editar_veiculo.html',context)

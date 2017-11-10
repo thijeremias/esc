@@ -38,11 +38,14 @@ def consultar(request):
             ativo = 1
         else:
             ativo = 0
-        context['produtos'] = Produto.objects.filter(
-            Q(ativo__iexact = ativo),
-            Q(descricao__icontains = request.POST.get('descricao')) |
-            Q(id__iexact = request.POST.get('descricao'))
-        )
+        if request.POST.get('descricao') == '0':
+            context['produtos'] = Produto.objects.filter(ativo=ativo)
+        else:
+            context['produtos'] = Produto.objects.filter(
+                Q(ativo__iexact = ativo),
+                Q(descricao__icontains = request.POST.get('descricao')) |
+                Q(id__iexact = request.POST.get('descricao'))
+            )
         context['controle'] = 1
         return render(request,'estoque/consultar.html',context)
     else:

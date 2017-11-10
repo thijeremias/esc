@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Estacionamento - Clientes{% endblock %}
+{% block title %}Financeiro - Lançamentos{% endblock %}
 {% block content %}
 
-<form method="POST" action="{% url 'estacionamento:cadastrar_cliente' %}">
+<form method="POST" action="{% url 'financeiro:lancamentos' %}">
     {% csrf_token %}
-<p align='center'>Cadastrar Cliente</p>
+<p align='center'>Lançamentos no Caixa</p>
 {% for campo in form %}
     <div class="form-group row">
         <div class="col-xs-4">
@@ -17,7 +16,7 @@
 {% endfor %}
 <div class="form-group row">
     <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
 </div>
 </form>

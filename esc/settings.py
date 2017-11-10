@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'esc',
     'vendas',
     'estacionamento',
+    'financeiro',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'esc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'c9',
+        'NAME':'esc',
         'HOST': 'localhost',
         'USER': 'thijeremias',
         'PASSWORD': '',

@@ -18,16 +18,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
 
+
 urlpatterns = [
-    url(r'^cadastrar_cliente/$', views.cadastrar_cliente, name = 'cadastrar_cliente'),
-    url(r'^cadastrar_veiculo/$', views.cadastrar_veiculo, name = 'cadastrar_veiculo'),
-    url(r'^consultar_veiculo/$', views.consultar_veiculo, name = 'consultar_veiculo'),
-    url(r'^editar_veiculo/(?P<pk>[0-9]+)/$', views.editar_veiculo, name = 'editar_veiculo'),
-    url(r'^mensalistas/$', views.mensalistas, name = 'mensalistas'),
-    url(r'^entrada/$', views.entrada, name = 'entrada'),
-    url(r'^saida/$', views.saida, name = 'saida'),
-    url(r'^config/$', views.config, name='config'),
-    
-    
-    
+    url(r'^contas_receber/$', views.contas_receber, name='contas_receber'),
+    url(r'^lancamentos/$', views.lancamentos, name='lancamentos'),
+    url(r'^bordero/$', views.bordero, name='bordero'),
+    url(r'consultar/$',views.consultar, name='consultar'),
+    url(r'excluir/(?P<pk>[0-9]+)/$',views.excluir, name='excluir'),
 ]
