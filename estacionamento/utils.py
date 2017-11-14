@@ -1,4 +1,5 @@
 from .models import Entrada, Config
+from financeiro.models import Caixa
 from django.utils import timezone
 
 def calcula_tempo(placa):
@@ -16,5 +17,20 @@ def calcula_tempo(placa):
         result['tempo'] = int(result['tempo'])
         result['resultado'] = (result['resultado'].seconds/3600)*float(valorHora.valor_hora_moto)
         result['resultado'] = round(result['resultado'],2)
-    entrada.delete()
     return result
+
+def lancar_caixa(placa, valor):
+    if placa is not None:
+        placa = Entrada.objects.get(pk = placa)
+        lancamento = Caixa()
+        lancamento.movimento = 0
+        lancamento.valor = valor
+        lancamento.descricao = placa.placa
+        lancamento.save()
+        placa.delete()
+    else:
+        lancamento = Caixa()
+        lancamento.movimento = 0
+        lancamento.valor = valor
+        lancamento.descricao = 'VENDA'
+        lancamento.save()

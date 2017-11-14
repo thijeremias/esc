@@ -8,6 +8,7 @@ import json
 from django.core import serializers
 from django.db.models import Q
 from .utils import render_to_pdf, create_table
+from estacionamento.utils import lancar_caixa
 
 # Create your views here.
 
@@ -15,7 +16,9 @@ def vendas(request):
     context = {}
     if request.method == 'POST':
         venda = vendaForm(request.POST)
+        valor = request.POST.get('valor')
         if venda.is_valid():
+            lancar_caixa(None,float(valor))
             venda.save()
             create_table(request.POST.getlist('produto_id'),request.POST.getlist('quantidade'))
             return redirect('vendas:imprimir')

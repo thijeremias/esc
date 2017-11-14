@@ -4,7 +4,7 @@ from .forms import configForm, veiculoForm, clienteForm, entradaForm, saidaForm,
 from .models import Veiculo, Config, Entrada
 from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
-from .utils import calcula_tempo
+from .utils import calcula_tempo, lancar_caixa
 
 # Create your views here.
 @csrf_exempt
@@ -69,7 +69,10 @@ def entrada(request):
 def saida(request):
     context = {}
     if request.method == 'POST':
-        context['result'] = calcula_tempo(request.POST.get('placa'))
+        placa = request.POST.get('placa')
+        context['result'] = calcula_tempo(placa)
+        valor = context['result']['resultado']
+        lancar_caixa(placa,valor)
         return render(request, 'estacionamento/saida.html',context)
     else:
         context['form'] = saidaForm()
